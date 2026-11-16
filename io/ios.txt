@@ -1,0 +1,402 @@
+testpredict: 200 inputs and outputs, from real runs (io/ios.pl has the same as Prolog facts).
+
+1. select_tests([main-parse,parse-io,lex-report,lex-format,eval-arith,eval-report,eval-format,arith-format], [t1-main,t2-lex,t3-eval,t4-report,t5-io], [arith,report])
+   => [t2,t3,t4]
+2. reach([main-parse,main-lex,main-eval,main-arith,main-io,parse-eval,parse-io,lex-format,eval-report], arith)
+   => [arith]
+3. select_tests([main-parse,main-arith,main-report,main-format,parse-arith,parse-format,parse-io,lex-arith,lex-report,lex-format,lex-io,eval-format,eval-io,report-io], [t1-parse,t2-arith,t3-report,t4-format], [arith,main])
+   => [t1,t2]
+4. reach([main-parse,main-lex,main-report,main-io,eval-io,arith-report,report-io], main)
+   => [io,lex,main,parse,report]
+5. select_tests([main-lex,main-eval,main-arith,main-report,parse-format,lex-report,lex-io,eval-report,arith-io], [t1-main,t2-parse,t3-arith,t4-io], [arith])
+   => [t1,t3]
+6. reach([main-parse,main-arith,parse-eval,parse-arith,parse-report,arith-format,report-format,report-io,format-io], report)
+   => [format,io,report]
+7. select_tests([main-arith,parse-arith,arith-report,report-io], [t1-main,t2-parse,t3-eval,t4-report,t5-io], [io])
+   => [t1,t2,t4,t5]
+8. reach([main-parse,parse-arith,parse-report,parse-io,arith-format,report-io], eval)
+   => [eval]
+9. select_tests([lex-io,eval-io], [t1-lex,t2-report,t3-format], [])
+   => []
+10. reach([main-eval,main-report,main-format,parse-arith,parse-report,lex-arith,lex-report,report-io], io)
+   => [io]
+11. select_tests([main-parse,main-eval,main-arith,main-report,main-io,parse-arith,parse-format,lex-arith,lex-report,arith-report,arith-io,report-format,report-io], [t1-lex,t2-eval,t3-io], [])
+   => []
+12. reach([main-parse,main-eval,parse-lex,parse-arith,parse-report,parse-format,lex-eval,lex-arith,eval-arith,eval-report,eval-format,eval-io,report-format,report-io,format-io], report)
+   => [format,io,report]
+13. select_tests([main-report,parse-eval,lex-arith,lex-format,eval-report,arith-report,arith-format], [t1-parse,t2-lex], [format])
+   => [t2]
+14. reach([main-format,parse-format,lex-arith,lex-report,lex-format,lex-io,report-io], lex)
+   => [arith,format,io,lex,report]
+15. select_tests([parse-io], [t1-arith,t2-format], [])
+   => []
+16. reach([main-lex,lex-report,eval-report], lex)
+   => [lex,report]
+17. select_tests([main-arith,parse-lex,parse-eval,parse-arith,parse-report,lex-arith,lex-format,lex-io,eval-report], [t1-main,t2-parse,t3-lex,t4-eval,t5-report,t6-io], [])
+   => []
+18. reach([main-lex,main-arith,main-report,main-format,parse-arith,parse-report,parse-io,lex-format,lex-io,eval-arith,arith-format], report)
+   => [report]
+19. select_tests([main-lex,main-eval,main-arith,parse-eval,parse-arith,eval-report,eval-format,eval-io,arith-format,arith-io,report-format,report-io], [t1-main,t2-eval,t3-io], [io])
+   => [t1,t2,t3]
+20. reach([main-eval,main-report,parse-arith,lex-io,eval-io,arith-io], io)
+   => [io]
+21. select_tests([lex-io,arith-io,format-io], [t1-parse,t2-eval,t3-report,t4-format,t5-io], [eval,format])
+   => [t2,t4]
+22. reach([main-parse,main-arith,main-io,lex-report,eval-io,arith-io,format-io], report)
+   => [report]
+23. select_tests([parse-arith,parse-report,lex-report,report-format], [t1-main,t2-arith,t3-format], [eval])
+   => []
+24. reach([main-arith,main-format,lex-format,eval-io,report-format], eval)
+   => [eval,io]
+25. select_tests([lex-arith,arith-io,report-format], [t1-parse,t2-lex,t3-arith,t4-report], [io,format])
+   => [t2,t3,t4]
+26. reach([main-format,main-io,parse-arith,parse-format,eval-format,report-io], report)
+   => [io,report]
+27. select_tests([main-parse,main-arith,main-report,main-io,parse-report,lex-eval,lex-arith,lex-format,eval-arith], [t1-main,t2-eval,t3-report,t4-format], [report,main])
+   => [t1,t3]
+28. reach([main-arith,main-io], report)
+   => [report]
+29. select_tests([main-eval,lex-format,eval-arith,report-io], [t1-main,t2-parse,t3-eval,t4-arith,t5-io], [])
+   => []
+30. reach([main-lex,main-report,parse-format,lex-arith,lex-report,eval-format,arith-io], format)
+   => [format]
+31. select_tests([main-eval,main-io,parse-lex,arith-report,format-io], [t1-arith,t2-report,t3-io], [eval,io])
+   => [t3]
+32. reach([main-lex,main-io,parse-report,lex-format,eval-arith,report-format,format-io], arith)
+   => [arith]
+33. select_tests([main-parse,main-eval,main-format,parse-eval,parse-io,eval-report,arith-io], [t1-arith,t2-report,t3-io], [])
+   => []
+34. reach([main-eval,main-report,parse-lex,parse-eval,parse-arith,parse-report,parse-io,lex-eval,arith-format], lex)
+   => [eval,lex]
+35. select_tests([main-parse,main-report,main-format,main-io,parse-eval,lex-arith,lex-report,eval-arith,arith-report,arith-io,format-io], [t1-parse,t2-lex,t3-arith,t4-report,t5-format], [parse])
+   => [t1]
+36. reach([main-parse,main-report,parse-lex,lex-eval,lex-arith,lex-report,report-io], arith)
+   => [arith]
+37. select_tests([main-arith,main-report,main-io,parse-io,lex-eval,eval-arith,arith-io], [t1-main,t2-arith,t3-report,t4-format], [report,eval])
+   => [t1,t3]
+38. reach([main-eval,eval-arith], report)
+   => [report]
+39. select_tests([main-report,main-format,main-io,parse-format,lex-arith,lex-format,arith-io], [t1-main,t2-eval,t3-format], [])
+   => []
+40. reach([main-parse,main-arith,main-report,parse-eval,parse-report,parse-format,lex-eval,lex-report,eval-arith,eval-report,eval-format,arith-io,report-io], main)
+   => [arith,eval,format,io,main,parse,report]
+41. select_tests([main-lex,main-arith,main-io,parse-format,lex-arith,lex-io,eval-report,eval-format,arith-format], [t1-main,t2-lex,t3-eval,t4-report], [])
+   => []
+42. reach([parse-eval,parse-arith,lex-eval,lex-format,eval-format,report-io], eval)
+   => [eval,format]
+43. select_tests([main-format,parse-lex,parse-eval,lex-report,eval-arith,eval-report,arith-format], [t1-eval,t2-report,t3-format], [lex,io])
+   => []
+44. reach([main-report,main-format,parse-format,lex-io,eval-report,arith-format,arith-io,report-format], eval)
+   => [eval,format,report]
+45. select_tests([main-parse,lex-eval,lex-arith,eval-report,arith-report,arith-io,report-format], [t1-main,t2-lex,t3-eval,t4-arith,t5-report], [lex,format])
+   => [t2,t3,t4,t5]
+46. reach([main-eval,main-format,parse-io,lex-io,eval-format,format-io], main)
+   => [eval,format,io,main]
+47. select_tests([main-parse,main-lex,main-io,parse-format,lex-format,eval-io,arith-format,report-format], [t1-eval,t2-arith,t3-io], [parse])
+   => []
+48. reach([main-parse,lex-format,report-format], eval)
+   => [eval]
+49. select_tests([main-lex,main-eval,main-report,parse-lex,parse-report,lex-eval,lex-arith,lex-report,lex-io,eval-arith,eval-report,eval-format,arith-format,arith-io,format-io], [t1-arith,t2-io], [main,io])
+   => [t1,t2]
+50. reach([main-arith,parse-lex,parse-eval,parse-report,arith-format,arith-io], lex)
+   => [lex]
+51. select_tests([main-lex,parse-report,lex-eval,eval-report,eval-io], [t1-main,t2-lex,t3-report,t4-io], [])
+   => []
+52. reach([main-lex,main-eval,main-report,main-format,lex-io,arith-format,report-format,report-io,format-io], parse)
+   => [parse]
+53. select_tests([main-arith,main-report,main-io,parse-lex,parse-arith,lex-report,lex-format,eval-io,arith-report], [t1-main,t2-parse,t3-eval,t4-arith,t5-format,t6-io], [main])
+   => [t1]
+54. reach([main-parse,main-lex,main-format,main-io,parse-report,parse-io,lex-arith], arith)
+   => [arith]
+55. select_tests([main-lex,parse-eval,parse-arith,parse-io,eval-format,eval-io,arith-report,arith-format,arith-io], [t1-main,t2-lex,t3-eval,t4-io], [parse])
+   => []
+56. reach([main-parse,parse-lex,parse-eval,lex-eval,eval-arith,format-io], report)
+   => [report]
+57. select_tests([main-parse,main-lex,main-report,parse-eval,lex-arith,lex-report,eval-arith,eval-format,eval-io,arith-report,report-format,report-io,format-io], [t1-parse,t2-arith,t3-report,t4-io], [])
+   => []
+58. reach([main-parse,main-report,main-io,parse-eval,parse-arith,lex-eval,eval-report,eval-io,arith-io,format-io], lex)
+   => [eval,io,lex,report]
+59. select_tests([main-report,parse-lex,lex-arith,lex-report,lex-format], [t1-main,t2-lex,t3-arith,t4-io], [])
+   => []
+60. reach([main-format,lex-report,lex-format,eval-io,arith-report,report-format,report-io,format-io], main)
+   => [format,io,main]
+61. select_tests([main-arith,main-report,parse-lex,parse-arith,parse-report,parse-format,lex-eval,lex-io,eval-report,arith-format,report-format,format-io], [t1-parse,t2-arith,t3-report,t4-format], [lex,report])
+   => [t1,t3]
+62. reach([main-lex,main-io,parse-format,eval-arith,arith-report], io)
+   => [io]
+63. select_tests([main-lex,main-eval,main-report,main-format,parse-eval,parse-arith,parse-report,parse-format,lex-arith,lex-format,lex-io,eval-format,eval-io,arith-format,report-format,format-io], [t1-eval,t2-arith,t3-report,t4-format], [main])
+   => []
+64. reach([main-report,main-format,main-io,parse-report,lex-report,arith-io,format-io], format)
+   => [format,io]
+65. select_tests([main-parse,main-arith,parse-report,parse-format,lex-report,lex-format,lex-io,eval-report], [t1-main,t2-report], [arith,io])
+   => [t1]
+66. reach([main-parse,main-eval,main-arith,main-io,parse-eval,parse-report,parse-io,lex-arith,lex-report,eval-io,arith-io,format-io], io)
+   => [io]
+67. select_tests([main-arith,parse-lex,parse-report,parse-io,lex-eval,lex-io,eval-format,eval-io,arith-report,report-format,report-io], [t1-parse,t2-eval,t3-arith,t4-report,t5-format,t6-io], [])
+   => []
+68. reach([parse-format,lex-arith,lex-format,lex-io,eval-report,eval-io,arith-report,arith-format,report-format,format-io], format)
+   => [format,io]
+69. select_tests([main-format,parse-format,lex-eval,lex-arith,eval-arith,eval-report,arith-report,arith-format,report-format], [t1-parse,t2-eval,t3-report], [])
+   => []
+70. reach([main-lex,main-eval,main-arith,main-report,main-io,parse-arith,parse-report,lex-report,eval-report,report-format], io)
+   => [io]
+71. select_tests([main-parse,main-format,parse-eval,parse-io,lex-arith,lex-report,lex-io,eval-io,arith-report,arith-format,report-format,report-io], [t1-parse,t2-eval], [parse])
+   => [t1]
+72. reach([main-eval,main-arith,parse-arith,parse-format,lex-eval,lex-report,lex-io,eval-arith,eval-report,arith-format,report-format,format-io], io)
+   => [io]
+73. select_tests([main-arith,main-format,lex-arith,lex-report,lex-io,eval-report,arith-io,format-io], [t1-parse,t2-lex,t3-eval,t4-arith,t5-io], [io,eval])
+   => [t2,t3,t4,t5]
+74. reach([main-parse,main-arith,main-format,main-io,parse-lex,parse-eval,parse-arith,parse-report,lex-report,lex-io,eval-arith,arith-report], parse)
+   => [arith,eval,io,lex,parse,report]
+75. select_tests([main-parse,main-format,main-io,parse-lex,lex-io,eval-report,eval-format,arith-report,format-io], [t1-lex,t2-arith,t3-report,t4-format], [main])
+   => []
+76. reach([main-parse,main-eval,main-arith,lex-arith,lex-report,lex-format,arith-format,report-format,format-io], arith)
+   => [arith,format,io]
+77. select_tests([main-eval,parse-format,lex-arith,lex-io,arith-report,arith-format,arith-io,report-format], [t1-main,t2-parse,t3-lex,t4-eval,t5-arith,t6-report,t7-format], [eval,format])
+   => [t1,t2,t3,t4,t5,t6,t7]
+78. reach([main-lex,main-report,main-format,parse-lex,parse-io,lex-arith,lex-report,eval-format,arith-io,format-io], arith)
+   => [arith,io]
+79. select_tests([main-parse,main-lex,main-report,arith-io], [t1-main,t2-lex,t3-arith,t4-report,t5-io], [format,eval])
+   => []
+80. reach([main-arith,main-report,parse-lex,parse-report,parse-format,lex-eval,lex-arith,eval-arith,eval-report], io)
+   => [io]
+81. select_tests([main-parse,main-arith,main-report,parse-arith,lex-format,eval-report,report-format], [t1-main,t2-parse,t3-report,t4-format], [arith])
+   => [t1,t2]
+82. reach([main-format,parse-arith,parse-report,lex-arith,lex-io,eval-report,arith-report,report-format], format)
+   => [format]
+83. select_tests([main-report,main-io,parse-format,parse-io,lex-eval,lex-io,eval-report,eval-format,arith-format,arith-io], [t1-parse,t2-lex,t3-arith,t4-report,t5-format,t6-io], [])
+   => []
+84. reach([main-lex,main-eval,main-io,parse-format,lex-eval,eval-io,arith-io,report-format,report-io], arith)
+   => [arith,io]
+85. select_tests([main-parse,main-lex,parse-eval,parse-format,parse-io,lex-eval,lex-report,eval-report,eval-format,eval-io,arith-report,report-format], [t1-main,t2-lex,t3-eval,t4-report], [io])
+   => [t1,t2,t3]
+86. reach([main-eval,main-arith,parse-report,lex-format,lex-io,eval-io,arith-format], main)
+   => [arith,eval,format,io,main]
+87. select_tests([main-eval,parse-eval,lex-report,lex-io], [t1-parse,t2-arith,t3-format,t4-io], [parse,format])
+   => [t1,t3]
+88. reach([main-lex,main-io,lex-format,lex-io,eval-io,arith-report,arith-io,report-format,format-io], eval)
+   => [eval,io]
+89. select_tests([arith-format,arith-io], [t1-parse,t2-eval,t3-arith,t4-report], [eval])
+   => [t2]
+90. reach([main-report,main-io,parse-arith,eval-report,eval-format,arith-io], main)
+   => [io,main,report]
+91. select_tests([main-lex,main-arith,main-io,parse-arith,parse-format,lex-format,eval-io,arith-report,format-io], [t1-main,t2-arith,t3-report,t4-io], [report,format])
+   => [t1,t2,t3]
+92. reach([main-arith,main-report,main-format,main-io,lex-arith,lex-io,report-io], main)
+   => [arith,format,io,main,report]
+93. select_tests([main-report,parse-format,parse-io,eval-io,format-io], [t1-main,t2-lex,t3-eval,t4-report,t5-format], [lex])
+   => [t2]
+94. reach([main-parse,main-lex,main-eval,parse-report,lex-arith,eval-arith,eval-format], arith)
+   => [arith]
+95. select_tests([main-report,main-io,parse-arith,lex-arith], [t1-main,t2-parse,t3-arith,t4-format,t5-io], [parse,io])
+   => [t1,t2,t5]
+96. reach([main-eval,main-report,main-format,parse-lex,parse-eval,parse-arith,parse-io,lex-arith,lex-report,eval-report,report-format], io)
+   => [io]
+97. select_tests([main-format,parse-report,lex-arith,lex-report,eval-format,report-format,format-io], [t1-parse,t2-lex,t3-arith,t4-io], [report])
+   => [t1,t2]
+98. reach([main-io,lex-eval,eval-report,arith-report,arith-format,format-io], report)
+   => [report]
+99. select_tests([main-parse,main-arith,parse-lex,parse-format,lex-report,lex-io], [t1-parse,t2-lex,t3-eval,t4-arith,t5-report,t6-format,t7-io], [eval,parse])
+   => [t1,t3]
+100. reach([main-lex,lex-eval,lex-format,lex-io,eval-format,arith-format,report-io,format-io], lex)
+   => [eval,format,io,lex]
+101. select_tests([main-arith,parse-lex,parse-eval,lex-report,eval-report,arith-report,arith-io,report-io], [t1-parse,t2-report], [])
+   => []
+102. reach([main-lex,parse-eval,eval-arith,arith-format,arith-io,format-io], report)
+   => [report]
+103. select_tests([main-parse,main-io,parse-lex,parse-format,lex-eval,lex-format,lex-io,eval-arith,eval-format,eval-io,arith-report,report-io,format-io], [t1-main,t2-lex,t3-arith,t4-format], [])
+   => []
+104. reach([parse-eval,lex-format,lex-io,eval-arith,eval-report,arith-format,report-format], main)
+   => [main]
+105. select_tests([main-format,parse-eval,lex-format,lex-io,eval-arith,eval-io,report-format], [t1-main,t2-report,t3-io], [lex])
+   => []
+106. reach([main-parse,main-lex,main-arith,main-report,parse-lex,parse-eval,lex-format,lex-io,eval-arith,eval-io,report-format,report-io], main)
+   => [arith,eval,format,io,lex,main,parse,report]
+107. select_tests([main-lex,main-report,parse-lex,parse-format,eval-io,format-io], [t1-main,t2-lex], [])
+   => []
+108. reach([main-eval,main-report,main-format,arith-report,arith-format], main)
+   => [eval,format,main,report]
+109. select_tests([parse-eval,parse-arith,parse-format,lex-report,lex-io], [t1-main,t2-parse,t3-format,t4-io], [parse,arith])
+   => [t2]
+110. reach([main-parse,main-report,main-format,lex-report,lex-format,report-format], report)
+   => [format,report]
+111. select_tests([main-io,eval-arith,eval-report,arith-report,report-io], [t1-parse,t2-lex,t3-arith,t4-report,t5-format], [])
+   => []
+112. reach([main-report,parse-format,format-io], report)
+   => [report]
+113. select_tests([main-report,parse-eval,parse-report,lex-io,eval-io,report-io], [t1-parse,t2-lex,t3-report], [format,report])
+   => [t1,t3]
+114. reach([main-eval,lex-eval,lex-format,lex-io,eval-arith,report-format], parse)
+   => [parse]
+115. select_tests([parse-lex,parse-eval,arith-format], [t1-arith,t2-report,t3-format,t4-io], [])
+   => []
+116. reach([main-arith,main-io,parse-report,lex-arith,lex-report,lex-format,arith-format], main)
+   => [arith,format,io,main]
+117. select_tests([main-lex,main-arith,main-report,parse-eval,parse-arith,lex-eval,lex-io,eval-format,eval-io,report-format,format-io], [t1-lex,t2-arith,t3-report], [parse])
+   => []
+118. reach([main-lex,main-format,parse-report,parse-format,parse-io,eval-report], io)
+   => [io]
+119. select_tests([main-arith,lex-arith,lex-report,lex-format,eval-report,eval-io,arith-format], [t1-main,t2-lex,t3-report,t4-format,t5-io], [eval,report])
+   => [t2,t3]
+120. reach([main-eval,main-arith,parse-eval,parse-report,parse-format,parse-io,eval-arith], io)
+   => [io]
+121. select_tests([main-parse,parse-arith,parse-format,lex-report,lex-format,lex-io,eval-format,format-io], [t1-main,t2-parse,t3-lex,t4-eval,t5-arith,t6-io], [arith,eval])
+   => [t1,t2,t4,t5]
+122. reach([main-parse,main-eval,main-arith,main-report,eval-report,eval-format,arith-report], io)
+   => [io]
+123. select_tests([main-parse,main-eval,main-format,main-io,parse-lex,parse-io,eval-arith,eval-report], [t1-main,t2-arith,t3-format,t4-io], [])
+   => []
+124. reach([main-parse,main-lex,main-eval,main-arith,parse-lex,parse-eval,parse-io,lex-eval,lex-report,lex-format,lex-io,format-io], arith)
+   => [arith]
+125. select_tests([main-arith,main-format,main-io,parse-io,lex-eval,lex-arith,eval-arith,eval-io,report-io,format-io], [t1-main,t2-parse,t3-eval,t4-io], [])
+   => []
+126. reach([main-lex,main-report,parse-lex,parse-eval,parse-report,parse-io,lex-report,eval-arith,arith-report,arith-format,arith-io,report-format,format-io], parse)
+   => [arith,eval,format,io,lex,parse,report]
+127. select_tests([main-parse,main-eval,main-arith,main-io,parse-eval,parse-arith,parse-io,lex-format,eval-arith,eval-io,arith-report,arith-format,arith-io,report-io,format-io], [t1-main,t2-parse,t3-eval,t4-format], [eval,parse])
+   => [t1,t2,t3]
+128. reach([main-report,main-io,parse-eval,parse-arith,lex-arith,lex-format,eval-format,eval-io,arith-report,arith-format], main)
+   => [io,main,report]
+129. select_tests([main-eval,main-report,parse-lex,parse-arith,parse-io,lex-format,arith-report,arith-format,arith-io], [t1-main,t2-parse,t3-format,t4-io], [])
+   => []
+130. reach([main-lex,main-report,parse-lex,parse-arith,parse-format,lex-report,eval-io,arith-report,arith-format,report-io], lex)
+   => [io,lex,report]
+131. select_tests([main-arith,main-report,main-format,parse-report,parse-format,lex-format,lex-io,eval-report,eval-format,report-format,report-io], [t1-main,t2-arith,t3-io], [io,eval])
+   => [t1,t3]
+132. reach([main-parse,main-arith,main-report,main-format,parse-format,lex-eval,lex-io,eval-format,eval-io,arith-report], parse)
+   => [format,parse]
+133. select_tests([main-parse,main-arith,main-report,parse-report,lex-arith,arith-format,report-format,format-io], [t1-main,t2-lex,t3-arith,t4-io], [])
+   => []
+134. reach([main-eval,parse-lex,lex-report,lex-io,report-io], eval)
+   => [eval]
+135. select_tests([main-parse,main-io,parse-arith,parse-format,lex-eval,eval-arith,eval-report,eval-format,arith-report,arith-io], [t1-lex,t2-arith,t3-report], [arith,arith])
+   => [t1,t2]
+136. reach([main-parse,main-arith,parse-arith,parse-format,lex-report,lex-format,eval-arith,eval-format,arith-io,format-io], parse)
+   => [arith,format,io,parse]
+137. select_tests([main-lex,main-format,main-io,parse-lex,parse-eval,parse-arith,parse-report,lex-eval,lex-format,eval-format,arith-format], [t1-main,t2-lex,t3-eval,t4-arith,t5-report,t6-io], [arith])
+   => [t4]
+138. reach([main-lex,main-eval,main-report,lex-format,lex-io,eval-report,arith-format,arith-io], format)
+   => [format]
+139. select_tests([main-lex,parse-eval,parse-report,eval-format,arith-report,arith-io,report-io,format-io], [t1-parse,t2-lex,t3-arith,t4-io], [arith])
+   => [t3]
+140. reach([main-lex,main-eval,main-arith,main-format,parse-lex,parse-format,lex-eval,lex-format,lex-io,eval-arith,arith-format,arith-io,report-format,report-io], format)
+   => [format]
+141. select_tests([main-lex,main-eval,parse-lex,lex-arith,lex-report,eval-report,eval-format,arith-report,arith-io,report-io], [t1-parse,t2-eval,t3-arith,t4-io], [])
+   => []
+142. reach([main-lex,main-eval,main-arith,main-report,parse-lex,parse-arith,parse-format,parse-io,lex-arith,lex-report,eval-arith,arith-format,report-io,format-io], io)
+   => [io]
+143. select_tests([main-lex,main-report,arith-report,report-format], [t1-main,t2-lex,t3-eval,t4-format], [eval])
+   => [t3]
+144. reach([main-parse,main-lex,main-arith,main-format,parse-eval,parse-arith,parse-io,lex-report,arith-report,report-format,report-io], main)
+   => [arith,eval,format,io,lex,main,parse,report]
+145. select_tests([main-arith,parse-lex,lex-eval,lex-io,eval-report,eval-format,arith-format,report-format], [t1-lex,t2-report,t3-format,t4-io], [eval,format])
+   => [t1,t2,t3]
+146. reach([main-report,report-format,report-io], format)
+   => [format]
+147. select_tests([main-lex,main-arith,parse-format,lex-format,eval-arith,arith-report,arith-format,arith-io,report-format], [t1-lex,t2-arith,t3-report,t4-io], [format])
+   => [t1,t2,t3]
+148. reach([main-lex,parse-format,lex-arith,arith-format,format-io], report)
+   => [report]
+149. select_tests([main-parse,parse-lex,parse-io,lex-format,arith-io,format-io], [t1-main,t2-lex,t3-eval,t4-io], [])
+   => []
+150. reach([main-lex,main-io,parse-lex,parse-arith,arith-report,arith-format,report-format,report-io,format-io], lex)
+   => [lex]
+151. select_tests([main-lex,main-report,main-format,parse-arith,parse-report,lex-arith,lex-format,eval-arith,eval-report,arith-io,report-format], [t1-lex,t2-arith,t3-report], [arith])
+   => [t1,t2]
+152. reach([main-eval,parse-eval,parse-arith,lex-arith,arith-format,report-io], lex)
+   => [arith,format,lex]
+153. select_tests([main-lex,main-arith,lex-eval,lex-arith,lex-report,eval-report,arith-report,format-io], [t1-eval,t2-arith,t3-report,t4-io], [])
+   => []
+154. reach([lex-arith,eval-format,eval-io,arith-format,format-io], main)
+   => [main]
+155. select_tests([main-report,parse-arith,parse-report,parse-format,eval-format,format-io], [t1-main,t2-format], [format,format])
+   => [t2]
+156. reach([main-eval,parse-format,lex-format,lex-io,arith-report,arith-io,report-io,format-io], parse)
+   => [format,io,parse]
+157. select_tests([main-io,parse-arith,lex-report,eval-report], [t1-main,t2-eval,t3-arith,t4-format,t5-io], [])
+   => []
+158. reach([lex-format,eval-io,arith-report,report-format], parse)
+   => [parse]
+159. select_tests([main-parse,main-eval,main-report,main-format,parse-format,lex-eval,lex-report,lex-io,eval-report,eval-io,report-io,format-io], [t1-main,t2-lex,t3-report,t4-format,t5-io], [lex])
+   => [t2]
+160. reach([main-arith,parse-eval,lex-report,lex-format,eval-arith,eval-report,arith-report,report-format], parse)
+   => [arith,eval,format,parse,report]
+161. select_tests([main-parse,main-lex,main-eval,main-report,lex-eval,lex-format,lex-io,eval-format,arith-report], [t1-main,t2-parse,t3-lex,t4-eval,t5-arith,t6-format], [report,eval])
+   => [t1,t3,t4,t5]
+162. reach([main-lex,main-report,main-io,parse-format,lex-io,eval-format,eval-io,arith-report,report-io], arith)
+   => [arith,io,report]
+163. select_tests([main-parse,main-io,parse-eval,parse-format,parse-io,lex-eval,eval-report,arith-io], [t1-lex,t2-eval,t3-io], [])
+   => []
+164. reach([main-arith,main-report,parse-arith,lex-io,report-format,report-io,format-io], main)
+   => [arith,format,io,main,report]
+165. select_tests([main-parse,main-arith,parse-eval,lex-io,report-format], [t1-main,t2-parse,t3-eval,t4-arith,t5-format,t6-io], [format])
+   => [t5]
+166. reach([main-parse,main-lex,main-arith,main-format,parse-lex,parse-arith,lex-report,arith-report,arith-io,format-io], lex)
+   => [lex,report]
+167. select_tests([main-parse,main-eval,main-io,parse-eval,lex-eval,lex-report,arith-format,arith-io,report-io], [t1-lex,t2-eval,t3-format], [])
+   => []
+168. reach([lex-report,lex-format], parse)
+   => [parse]
+169. select_tests([main-report,main-format,parse-lex,parse-eval,parse-format,lex-format,eval-format,format-io], [t1-main,t2-parse,t3-lex,t4-arith,t5-report,t6-format], [format])
+   => [t1,t2,t3,t6]
+170. reach([parse-report,lex-format], arith)
+   => [arith]
+171. select_tests([main-lex,main-io,parse-io,arith-report,arith-io], [t1-main,t2-parse,t3-lex,t4-arith,t5-report,t6-format,t7-io], [])
+   => []
+172. reach([main-eval,main-report,parse-report,parse-format,eval-arith,eval-io,arith-report], lex)
+   => [lex]
+173. select_tests([main-parse,main-lex,main-eval,main-report,parse-lex,parse-arith,parse-format,lex-format,eval-report,eval-io,arith-report,report-io], [t1-main,t2-parse,t3-lex,t4-arith,t5-report], [main])
+   => [t1]
+174. reach([main-report,main-format,main-io,parse-lex,parse-eval,parse-io,arith-format,arith-io,report-io], arith)
+   => [arith,format,io]
+175. select_tests([main-io,lex-report,lex-io,eval-io], [t1-parse,t2-lex,t3-report,t4-format,t5-io], [eval])
+   => []
+176. reach([main-arith,main-format,parse-lex,parse-eval,parse-io,lex-report,eval-format], arith)
+   => [arith]
+177. select_tests([main-eval,main-io,lex-eval,lex-report,lex-format,lex-io,eval-report,eval-format,eval-io,arith-io,report-format], [t1-main,t2-lex,t3-io], [])
+   => []
+178. reach([main-lex,main-io,eval-arith,eval-format,eval-io,arith-format,report-format,report-io], parse)
+   => [parse]
+179. select_tests([main-eval,parse-lex,parse-report,parse-io,lex-report], [t1-eval,t2-report,t3-format], [format,arith])
+   => [t3]
+180. reach([main-format,parse-arith,lex-arith,lex-report,eval-arith,arith-report,arith-io,report-format,format-io], parse)
+   => [arith,format,io,parse,report]
+181. select_tests([main-lex,main-format,lex-arith,eval-format], [t1-report,t2-format,t3-io], [])
+   => []
+182. reach([main-lex,main-eval,main-arith,main-io,parse-lex,parse-report,parse-format,lex-format,lex-io,eval-arith,eval-report,eval-format,eval-io,arith-report,arith-format], arith)
+   => [arith,format,report]
+183. select_tests([main-format,parse-lex,parse-eval,parse-io,lex-eval,lex-arith,lex-report,eval-report,arith-io,report-format,format-io], [t1-main,t2-lex,t3-eval,t4-arith,t5-format,t6-io], [])
+   => []
+184. reach([main-parse,main-arith,main-format,main-io,parse-lex,parse-eval,parse-arith,parse-report,lex-eval,lex-arith,lex-format,eval-arith,eval-io,arith-report,arith-format,arith-io,format-io], arith)
+   => [arith,format,io,report]
+185. select_tests([main-eval,main-report,parse-lex,parse-report,parse-io,lex-arith,lex-format,eval-format], [t1-main,t2-parse,t3-lex,t4-eval,t5-arith,t6-io], [])
+   => []
+186. reach([main-lex,main-io,parse-io,lex-format,lex-io,eval-report,report-format], report)
+   => [format,report]
+187. select_tests([main-parse,main-report,parse-lex,lex-report,lex-format,arith-io,format-io], [t1-main,t2-parse,t3-lex,t4-eval,t5-report], [])
+   => []
+188. reach([lex-report], eval)
+   => [eval]
+189. select_tests([main-arith,lex-arith,lex-format,lex-io,arith-io,format-io], [t1-parse], [eval])
+   => []
+190. reach([main-arith,parse-lex,eval-arith,eval-format,report-format,report-io,format-io], lex)
+   => [lex]
+191. select_tests([main-eval,main-report,main-io,parse-lex,lex-format,arith-report,report-format,report-io], [t1-main,t2-lex,t3-eval,t4-format], [])
+   => []
+192. reach([main-format,main-io,parse-lex,parse-eval,parse-report,parse-io,lex-report,eval-arith,eval-report,report-io], io)
+   => [io]
+193. select_tests([main-parse,main-eval,main-arith,main-format,main-io,lex-format,eval-report,arith-io,report-format,format-io], [t1-lex,t2-format], [arith])
+   => []
+194. reach([main-arith,main-format,main-io,parse-eval,parse-arith,parse-report,lex-report,eval-io,arith-io,report-io], lex)
+   => [io,lex,report]
+195. select_tests([main-report,main-format,lex-arith,lex-format,eval-arith,eval-format,eval-io,arith-report,report-format,report-io,format-io], [t1-parse,t2-arith,t3-report,t4-format], [])
+   => []
+196. reach([main-arith,main-report,parse-eval,parse-io,lex-arith,eval-format,eval-io,arith-io], eval)
+   => [eval,format,io]
+197. select_tests([main-parse,main-lex,main-arith,parse-lex,lex-format,eval-report,eval-format,eval-io,arith-io,report-format,report-io], [t1-lex,t2-eval,t3-arith,t4-format,t5-io], [eval,parse])
+   => [t2]
+198. reach([main-lex,main-eval,main-io,lex-format,format-io], report)
+   => [report]
+199. select_tests([main-eval,main-io,parse-arith,eval-io,report-io], [t1-main,t2-lex,t3-eval,t4-arith,t5-report,t6-format,t7-io], [lex,eval])
+   => [t1,t2,t3]
+200. reach([main-arith,main-report,parse-report,lex-report,arith-format,report-io,format-io], eval)
+   => [eval]
